@@ -11,7 +11,7 @@ import (
 
 // Основные константы, необходимые для расчетов.
 const (
-	lenStep                    = 0.65 // средняя длина шага.
+	//lenStep                    = 0.65 // средняя длина шага.
 	mInKm                      = 1000 // количество метров в километре.
 	minInH                     = 60   // количество минут в часе.
 	stepLengthCoefficient      = 0.45 // коэффициент для расчета длины шага на основе роста.
@@ -75,6 +75,7 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 
 	if err != nil {
 		log.Println(err)
+		return "", err
 	}
 
 	switch typeOfActivity {
