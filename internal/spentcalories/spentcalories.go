@@ -23,29 +23,29 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 
 	if len(mas) != 3 {
 		err := errors.New("data parse error")
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	steps, err := strconv.Atoi(mas[0])
 
 	if err != nil {
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	if steps <= 0 {
 		err := errors.New("the number of steps is negative or equal to zero")
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	durationOfActivity, err := time.ParseDuration(mas[2])
 
 	if err != nil {
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	if durationOfActivity <= time.Duration(0) {
 		err := errors.New("the duration of the activity is too short")
-		return 0, "", time.Duration(0), err
+		return 0, "", 0, err
 	}
 
 	return steps, mas[1], durationOfActivity, nil
@@ -60,7 +60,7 @@ func distance(steps int, height float64) float64 {
 func meanSpeed(steps int, height float64, duration time.Duration) float64 {
 
 	if duration <= time.Duration(0) {
-		return 0.0
+		return 0
 	}
 
 	dist := distance(steps, height)
@@ -125,22 +125,22 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 
 	if steps <= 0 {
 		err := errors.New("the number of steps is negative or equal to zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if weight <= 0 {
 		err := errors.New("the user's weight is negative or zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if height <= 0 {
 		err := errors.New("the user's height is negative or zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if duration <= time.Duration(0) {
-		err := errors.New("The running time is too short")
-		return 0.0, err
+		err := errors.New("the running time is too short")
+		return 0, err
 	}
 
 	averageSpeed := meanSpeed(steps, height, duration)
@@ -154,22 +154,22 @@ func WalkingSpentCalories(steps int, weight, height float64, duration time.Durat
 
 	if steps <= 0 {
 		err := errors.New("the number of steps is negative or equal to zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if weight <= 0 {
 		err := errors.New("the user's weight is negative or zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if height <= 0 {
 		err := errors.New("the user's height is negative or zero")
-		return 0.0, err
+		return 0, err
 	}
 
 	if duration <= time.Duration(0) {
-		err := errors.New("The walking time is too short")
-		return 0.0, err
+		err := errors.New("the walking time is too short")
+		return 0, err
 	}
 
 	averageSpeed := meanSpeed(steps, height, duration)
